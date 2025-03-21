@@ -1,0 +1,7 @@
+SUPABASE_URL=https://kkk.supabase.co
+SUPABASE_KEY=kkk
+NEXTAUTH_URL=http://localhost:3000/
+NEXTAUTH_SECRET=ViuKy0LtkUnDRs7WVAT7OwjvnaurFSbV
+
+AUTH_GOOGLE_ID=kkk.apps.googleusercontent.com
+AUTH_GOOGLE_SECRET=kkk
