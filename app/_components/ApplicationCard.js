@@ -17,8 +17,8 @@ function ApplicationCard({ application }) {
       </div> */}
 
       <div className="flex-grow">
-        <div className="flex justify-between pt-5 pb-4 px-7 bg-primary-950">
-          <h3 className="text-blue-500 font-semibold text-2xl mb-3">{name}</h3>
+        <div className="flex justify-between pt-5 pb-3 px-7 bg-primary-950">
+          <h3 className="text-blue-500 font-semibold text-2xl">{name}</h3>
 
           <div className="flex gap-3 items-center mb-2">
             <UsersIcon className="h-5 w-5 text-primary-600" />
@@ -28,12 +28,12 @@ function ApplicationCard({ application }) {
         <div className="flex justify-between items-center pl-5 g-primary-950 border-t border-t-primary-800 text-right">
           <p>{description}</p>
           <div className="flex flex-col">
-            <Link
+            {/* <Link
               href={`/applications/view/${id}`}
               className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"
             >
               View Details &rarr;
-            </Link>
+            </Link> */}
             <Link
               href={`/applications/update/${id}`}
               className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"

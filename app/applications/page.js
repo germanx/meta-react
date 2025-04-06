@@ -29,9 +29,7 @@ export default async function Page({ searchParams }) {
 
   return (
     <div>
-      <h1 className="text-4xl mb-5 text-blue-400 font-medium">
-        Business Applications
-      </h1>
+      <h1 className="text-4xl mb-5 text-blue-400 font-medium">Components</h1>
 
       <div className="flex justify-end mb-8">
         <Filter filterList={filterList} />

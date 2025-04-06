@@ -10,6 +10,7 @@ export async function updateApplication(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
+  const id = Number(formData.get('id'));
   const name = formData.get('name');
   const description = formData.get('description');
   const business_line_id = Number(formData.get('business_line_id'));
@@ -24,13 +25,69 @@ export async function updateApplication(formData) {
   const { data, error } = await supabase
     .from('applications')
     .update(updateData)
-    .eq('id', Number(formData.get('id')));
+    .eq('id', id);
 
   if (error) throw new Error('Application could not be updated');
 
   revalidatePath('/applications');
+  revalidatePath(`/applications/update/${id}`);
+
+  redirect('/applications');
 }
 
+export async function updateClassifier(formData) {
+  // const session = await auth();
+  // if (!session) throw new Error('You must be logged in');
+
+  const id = Number(formData.get('id'));
+  const name = formData.get('name');
+  const description = formData.get('description');
+
+  const updateData = {
+    name,
+    description,
+  };
+
+  const { error } = await supabase
+    .from('classifier')
+    .update(updateData)
+    .eq('id', id);
+
+  if (error) throw new Error('Classifier could not be updated');
+
+  revalidatePath('/classifier');
+  revalidatePath(`/classifier/update/${id}`);
+
+  // redirect('/classifier');
+}
+
+export async function updateClassifierItem(formData) {
+  // const session = await auth();
+  // if (!session) throw new Error('You must be logged in');
+
+  const id = Number(formData.get('id'));
+  const name = formData.get('name');
+  const description = formData.get('description');
+
+  const updateData = {
+    name,
+    description,
+  };
+
+  const { error } = await supabase
+    .from('classifier_items')
+    .update(updateData)
+    .eq('id', id);
+
+  if (error) throw new Error('Classifier could not be updated');
+
+  revalidatePath('/classifier');
+  revalidatePath(`/classifier/update/${id}`);
+
+  // redirect('/classifier');
+}
+
+//////////////////////////////////////////////
 // Reservations
 export async function updateBooking(formData) {
   const session = await auth();

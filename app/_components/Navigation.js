@@ -17,6 +17,14 @@ export default async function Navigation() {
           </Link>
         </li>
         <li>
+          <Link
+            href="/classifier"
+            className="hover:text-blue-400 transition-colors"
+          >
+            Classifier
+          </Link>
+        </li>
+        <li>
           <a href="/about" className="hover:text-blue-400 transition-colors">
             About
           </a>

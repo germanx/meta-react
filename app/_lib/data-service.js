@@ -40,21 +40,41 @@ export const getBusinessLines = async function () {
   return data;
 };
 
-/* Cabins */
-export async function getCabinPrice(id) {
+/* Classifier */
+export async function getClassifiers() {
   const { data, error } = await supabase
-    .from('cabins')
-    .select('regularPrice, discount')
-    .eq('id', id)
-    .single();
+    .from('classifier')
+    .select('id, name, description')
+    .order('name');
+  // console.log('>>> cls', data);
 
-  if (error) {
-    console.error(error);
-  }
-
+  if (error) throw new Error('Classifier could not be loaded');
   return data;
 }
 
+export async function getClassifier(id) {
+  const { data, error } = await supabase
+    .from('classifier')
+    .select('id, name, description')
+    .eq('id', id)
+    .single();
+
+  if (error) throw new Error('Classifier could not be loaded');
+  return data;
+}
+
+export async function getClassifierItems(classifier_id) {
+  const { data, error } = await supabase
+    .from('classifier_items')
+    .select('id, name, description, classifier_id')
+    .eq('classifier_id', classifier_id)
+    .order('name');
+  // console.log('>>> cls_items', data, classifier_id);
+
+  if (error) throw new Error('Classifier Items could not be loaded');
+  return data;
+}
+//////////////////////////////////////////////////////////////
 // Guests are uniquely identified by their email address
 export async function getGuest(email) {
   const { data, error } = await supabase
