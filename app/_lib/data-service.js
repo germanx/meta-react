@@ -4,30 +4,27 @@ import { supabase } from './supabase';
 
 /////////////
 // GET
-
 export async function getApplication(id) {
   const { data, error } = await supabase
     .from('applications')
-    .select('*')
+    .select('id, name, description, business_line_id, business_lines(name)')
     .eq('id', id)
     .single();
 
   // For testing !!!!!!!!!!!!!!
   // await new Promise((res) => setTimeout(res, 2000));
 
-  if (error) {
-    console.error(error);
-    notFound();
-  }
-
+  if (error) notFound();
   return data;
 }
 
 export const getApplications = async function () {
   const { data, error } = await supabase
     .from('applications')
-    .select('id, name, descr, business_line')
+    .select('id, name, description, business_line_id, business_lines(name)')
     .order('name');
+
+  // console.log(data);
 
   if (error) throw new Error('Applications could not be loaded');
   return data;
@@ -36,7 +33,7 @@ export const getApplications = async function () {
 export const getBusinessLines = async function () {
   const { data, error } = await supabase
     .from('business_lines')
-    .select('id, name, descr')
+    .select('id, name, description')
     .order('name');
 
   if (error) throw new Error('Business line could not be loaded');

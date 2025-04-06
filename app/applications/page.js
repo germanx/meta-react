@@ -19,6 +19,14 @@ export default async function Page({ searchParams }) {
   const business_lines = await getBusinessLines();
   const filterList = business_lines.map((item) => item.name);
 
+  let business_line = null;
+  let business_line_id = 0;
+  if (filter !== 'all') {
+    business_line = business_lines.filter((item) => item.name === filter);
+    business_line_id = business_line[0].id;
+  }
+  // console.log('>>> BL:', business_line);
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-blue-400 font-medium">
@@ -29,8 +37,8 @@ export default async function Page({ searchParams }) {
         <Filter filterList={filterList} />
       </div>
 
-      <Suspense fallback={<Spinner />} key={filter}>
-        <ApplicationList filter={filter} />
+      <Suspense fallback={<Spinner />} key={business_line_id}>
+        <ApplicationList business_line_id={business_line_id} />
       </Suspense>
     </div>
   );

@@ -1,9 +1,7 @@
-// import Image from 'next/image';
-import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
-import TextExpander from '@/app/_components/TextExpander';
+import { UsersIcon } from '@heroicons/react/24/solid';
 
-function Application({ application }) {
-  const { id, name, descr, business_line } = application;
+function ApplicationView({ application }) {
+  const { name, description, business_line } = application;
 
   return (
     <div className="border border-primary-800 py-3 px-10 mb-24">
@@ -16,10 +14,9 @@ function Application({ application }) {
           <p className="text-2xl text-primary-200">{business_line}</p>
         </div>
       </div>
-
-      <p className="text-2xl text-primary-300 mb-10">{descr}</p>
+      <p className="text-2xl text-primary-300 mb-10">{description}</p>
     </div>
   );
 }
 
-export default Application;
+export default ApplicationView;

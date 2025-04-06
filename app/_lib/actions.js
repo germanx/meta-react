@@ -6,25 +6,29 @@ import { supabase } from './supabase';
 import { getBookings } from './data-service';
 import { redirect } from 'next/navigation';
 
-export async function updateGuest(formData) {
-  const session = await auth();
-  if (!session) throw new Error('You must be logged in');
+export async function updateApplication(formData) {
+  // const session = await auth();
+  // if (!session) throw new Error('You must be logged in');
 
-  const nationalID = formData.get('nationalID');
-  const [nationality, countryFlag] = formData.get('nationality').split('%');
-  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
-    throw new Error('Please provide a valid national ID');
+  const name = formData.get('name');
+  const description = formData.get('description');
+  const business_line_id = Number(formData.get('business_line_id'));
 
-  const updateData = { nationality, countryFlag, nationalID };
+  const updateData = {
+    name,
+    description,
+    business_line_id,
+  };
+  // console.log('>>> update', updateData);
 
   const { data, error } = await supabase
-    .from('guests')
+    .from('applications')
     .update(updateData)
-    .eq('id', session.user.guestId);
+    .eq('id', Number(formData.get('id')));
 
-  if (error) throw new Error('Guest could not be updated');
+  if (error) throw new Error('Application could not be updated');
 
-  revalidatePath('/account/profile');
+  revalidatePath('/applications');
 }
 
 // Reservations

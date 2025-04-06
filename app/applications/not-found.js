@@ -7,7 +7,7 @@ function NotFound() {
         Application could not be found :(
       </h1>
       <Link
-        href="/cabins"
+        href="/applications"
         className="inline-block bg-blue-400 text-primary-800 px-6 py-3 text-lg"
       >
         Back to all applications
