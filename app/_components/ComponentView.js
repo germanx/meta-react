@@ -1,7 +1,7 @@
 import { UsersIcon } from '@heroicons/react/24/solid';
 
-function ApplicationView({ application }) {
-  const { name, description, business_line } = application;
+function ApplicationView({ component }) {
+  const { name, description, division } = component;
 
   return (
     <div className="border border-primary-800 py-3 px-10 mb-24">
@@ -11,7 +11,7 @@ function ApplicationView({ application }) {
         </h3>
         <div className="flex gap-3 items-center mb-2">
           <UsersIcon className="h-5 w-5 text-primary-600" />
-          <p className="text-2xl text-primary-200">{business_line}</p>
+          <p className="text-2xl text-primary-200">{division}</p>
         </div>
       </div>
       <p className="text-2xl text-primary-300 mb-10">{description}</p>

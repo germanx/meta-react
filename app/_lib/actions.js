@@ -6,14 +6,14 @@ import { supabase } from './supabase';
 import { getBookings } from './data-service';
 import { redirect } from 'next/navigation';
 
-export async function updateApplication(formData) {
+export async function updateComponent(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
   const id = Number(formData.get('id'));
   const name = formData.get('name');
   const description = formData.get('description');
-  const business_line_id = Number(formData.get('business_line_id'));
+  const business_line_id = Number(formData.get('division_id'));
 
   const updateData = {
     name,
@@ -23,16 +23,16 @@ export async function updateApplication(formData) {
   // console.log('>>> update', updateData);
 
   const { data, error } = await supabase
-    .from('applications')
+    .from('component')
     .update(updateData)
     .eq('id', id);
 
-  if (error) throw new Error('Application could not be updated');
+  if (error) throw new Error('Component could not be updated');
 
-  revalidatePath('/applications');
-  revalidatePath(`/applications/update/${id}`);
+  revalidatePath('/component');
+  revalidatePath(`/component/update/${id}`);
 
-  redirect('/applications');
+  redirect('/component');
 }
 
 export async function updateClassifier(formData) {
@@ -75,7 +75,7 @@ export async function updateClassifierItem(formData) {
   };
 
   const { error } = await supabase
-    .from('classifier_items')
+    .from('classifier_item')
     .update(updateData)
     .eq('id', id);
 
@@ -85,6 +85,26 @@ export async function updateClassifierItem(formData) {
   revalidatePath(`/classifier/update/${id}`);
 
   // redirect('/classifier');
+}
+
+export async function updateComponentClassifier(formData) {
+  // const session = await auth();
+  // if (!session) throw new Error('You must be logged in');
+
+  // console.log('>>> formData:', formData);
+
+  const component_id = Number(formData.get('component_id'));
+  const classifier_item_id = Number(formData.get('classifier_item_id'));
+
+  const { error } = await supabase.from('component_classifier').upsert({
+    component_id: component_id,
+    classifier_item_id: classifier_item_id,
+  });
+
+  if (error) throw new Error('Classifier could not be updated');
+
+  revalidatePath('/component');
+  revalidatePath(`/component/update/${component_id}`);
 }
 
 //////////////////////////////////////////////

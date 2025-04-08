@@ -73,9 +73,9 @@ function ClassifierForm({ classifier, classifierItems }) {
               <SubmitButton pendingLabel="Updating...">
                 Update item
               </SubmitButton>
-              {/* <SubmitButton pendingLabel="Deleting...">
+              <SubmitButton pendingLabel="Deleting...">
                 Delete item
-              </SubmitButton> */}
+              </SubmitButton>
             </div>
           </form>
         ))}

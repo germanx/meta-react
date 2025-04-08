@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { UsersIcon } from '@heroicons/react/24/solid';
 
-function ApplicationCard({ application }) {
-  const { id, name, description, business_line_id, business_lines } =
-    application;
+function ComponentCard({ component }) {
+  const { id, name, description, division } = component;
 
   return (
     <div className="flex border-primary-800 border">
@@ -22,7 +21,7 @@ function ApplicationCard({ application }) {
 
           <div className="flex gap-3 items-center mb-2">
             <UsersIcon className="h-5 w-5 text-primary-600" />
-            <p className="text-lg text-primary-200">{business_lines.name}</p>
+            <p className="text-lg text-primary-200">{division.name}</p>
           </div>
         </div>
         <div className="flex justify-between items-center pl-5 g-primary-950 border-t border-t-primary-800 text-right">
@@ -35,7 +34,7 @@ function ApplicationCard({ application }) {
               View Details &rarr;
             </Link> */}
             <Link
-              href={`/applications/update/${id}`}
+              href={`/component/update/${id}`}
               className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"
             >
               Update Details &rarr;
@@ -47,4 +46,4 @@ function ApplicationCard({ application }) {
   );
 }
 
-export default ApplicationCard;
+export default ComponentCard;

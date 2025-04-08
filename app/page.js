@@ -19,7 +19,7 @@ export default function Page() {
           IT Architecture
         </h1>
         <Link
-          href="/applications"
+          href="/component"
           className="bg-blue-400 px-8 py-6 text-primary-800 text-lg font-semibold hover:bg-blue-500 transition-all"
         >
           Explore Repository

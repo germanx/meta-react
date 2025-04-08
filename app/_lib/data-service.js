@@ -4,10 +4,10 @@ import { supabase } from './supabase';
 
 /////////////
 // GET
-export async function getApplication(id) {
+export async function getComponent(id) {
   const { data, error } = await supabase
-    .from('applications')
-    .select('id, name, description, business_line_id, business_lines(name)')
+    .from('component')
+    .select('id, name, description, division_id, division(name)')
     .eq('id', id)
     .single();
 
@@ -18,10 +18,10 @@ export async function getApplication(id) {
   return data;
 }
 
-export const getApplications = async function () {
+export const getComponents = async function () {
   const { data, error } = await supabase
-    .from('applications')
-    .select('id, name, description, business_line_id, business_lines(name)')
+    .from('component')
+    .select('id, name, description, division_id, division(name)')
     .order('name');
 
   // console.log(data);
@@ -30,13 +30,13 @@ export const getApplications = async function () {
   return data;
 };
 
-export const getBusinessLines = async function () {
+export const getDivisions = async function () {
   const { data, error } = await supabase
-    .from('business_lines')
+    .from('division')
     .select('id, name, description')
     .order('name');
 
-  if (error) throw new Error('Business line could not be loaded');
+  if (error) throw new Error('Business division could not be loaded');
   return data;
 };
 
@@ -65,11 +65,22 @@ export async function getClassifier(id) {
 
 export async function getClassifierItems(classifier_id) {
   const { data, error } = await supabase
-    .from('classifier_items')
+    .from('classifier_item')
     .select('id, name, description, classifier_id')
     .eq('classifier_id', classifier_id)
     .order('name');
   // console.log('>>> cls_items', data, classifier_id);
+
+  if (error) throw new Error('Classifier Items could not be loaded');
+  return data;
+}
+
+export async function getComponentClassifier(component_id) {
+  const { data, error } = await supabase
+    .from('component_classifier')
+    .select('component_id, classifier_item_id, classifier_item(classifier_id)')
+    .eq('component_id', component_id);
+  // console.log('>>> cls_items', data);
 
   if (error) throw new Error('Classifier Items could not be loaded');
   return data;
