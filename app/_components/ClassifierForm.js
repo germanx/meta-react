@@ -41,7 +41,7 @@ function ClassifierForm({ classifier, classifierItems }) {
 
       <h3 className="text-2xl mt-6 text-blue-400 font-medium">Items</h3>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-        {classifierItems.map((item) => (
+        {classifierItems?.map((item) => (
           <form
             key={item.id}
             action={updateClassifierItem}
@@ -73,9 +73,9 @@ function ClassifierForm({ classifier, classifierItems }) {
               <SubmitButton pendingLabel="Updating...">
                 Update item
               </SubmitButton>
-              <SubmitButton pendingLabel="Deleting...">
+              {/* <SubmitButton pendingLabel="Deleting...">
                 Delete item
-              </SubmitButton>
+              </SubmitButton> */}
             </div>
           </form>
         ))}
