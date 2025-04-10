@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-function ClassifierItem({ item }) {
-  const { id, name, description } = item;
+function ClassifierValue({ value }) {
+  const { id, name, description } = value;
 
   return (
     <div className="flex">
@@ -15,4 +15,4 @@ function ClassifierItem({ item }) {
   );
 }
 
-export default ClassifierItem;
+export default ClassifierValue;

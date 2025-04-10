@@ -6,33 +6,33 @@ import { supabase } from './supabase';
 import { getBookings } from './data-service';
 import { redirect } from 'next/navigation';
 
-export async function updateComponent(formData) {
+export async function updateElement(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
   const id = Number(formData.get('id'));
   const name = formData.get('name');
   const description = formData.get('description');
-  const business_line_id = Number(formData.get('division_id'));
+  const division_id = Number(formData.get('division_id'));
 
   const updateData = {
     name,
     description,
-    business_line_id,
+    division_id,
   };
   // console.log('>>> update', updateData);
 
   const { data, error } = await supabase
-    .from('component')
+    .from('element')
     .update(updateData)
     .eq('id', id);
 
   if (error) throw new Error('Component could not be updated');
 
-  revalidatePath('/component');
-  revalidatePath(`/component/update/${id}`);
+  revalidatePath('/elements');
+  revalidatePath(`/elements/update/${id}`);
 
-  redirect('/component');
+  redirect('/elements');
 }
 
 export async function updateClassifier(formData) {
@@ -55,13 +55,14 @@ export async function updateClassifier(formData) {
 
   if (error) throw new Error('Classifier could not be updated');
 
-  revalidatePath('/classifier');
-  revalidatePath(`/classifier/update/${id}`);
+  revalidatePath('/classifiers');
+  revalidatePath(`/classifiers/update/${id}`);
 
   // redirect('/classifier');
 }
 
-export async function updateClassifierItem(formData) {
+// export async function updateClassifierItem(formData) {
+export async function updateClassifierValue(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
@@ -75,36 +76,39 @@ export async function updateClassifierItem(formData) {
   };
 
   const { error } = await supabase
-    .from('classifier_item')
+    .from('classifier_value')
     .update(updateData)
     .eq('id', id);
 
   if (error) throw new Error('Classifier could not be updated');
 
-  revalidatePath('/classifier');
-  revalidatePath(`/classifier/update/${id}`);
+  revalidatePath('/classifiers');
+  revalidatePath(`/classifiers/update/${id}`);
 
   // redirect('/classifier');
 }
 
-export async function updateComponentClassifier(formData) {
+export async function updateElementClassifier(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
   // console.log('>>> formData:', formData);
 
-  const component_id = Number(formData.get('component_id'));
-  const classifier_item_id = Number(formData.get('classifier_item_id'));
+  const element_id = Number(formData.get('element_id'));
+  const classifier_id = Number(formData.get('classifier_id'));
+  const classifier_value_id = Number(formData.get('classifier_value_id'));
 
-  const { error } = await supabase.from('component_classifier').upsert({
-    component_id: component_id,
-    classifier_item_id: classifier_item_id,
+  const { error } = await supabase.from('element_classifier').upsert({
+    element_id: element_id,
+    classifier_id: classifier_id,
+    classifier_value_id: classifier_value_id,
   });
 
-  if (error) throw new Error('Classifier could not be updated');
+  if (error)
+    throw new Error('Classifier value for element could not be updated');
 
-  revalidatePath('/component');
-  revalidatePath(`/component/update/${component_id}`);
+  revalidatePath('/elements');
+  revalidatePath(`/elements/update/${element_id}`);
 }
 
 //////////////////////////////////////////////

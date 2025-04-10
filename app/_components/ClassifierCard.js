@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { getClassifierItems } from '../_lib/data-service';
-import ClassifierItem from './ClassifierItem';
+import { getClassifierValues } from '../_lib/data-service';
+import ClassifierValue from './ClassifierValue';
 
 async function ClassifierCard({ classifier }) {
   const { id, name, description } = classifier;
-  const cls_items = await getClassifierItems(classifier.id);
+  const cls_values = await getClassifierValues(id);
 
   return (
     <div className="flex border-primary-800 border">
@@ -18,7 +18,7 @@ async function ClassifierCard({ classifier }) {
           </div>
           <div className="border-primary-800 border">
             <Link
-              href={`/classifier/update/${id}`}
+              href={`/classifiers/update/${id}`}
               className="py-3 px-4 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"
             >
               Update &rarr;
@@ -27,8 +27,8 @@ async function ClassifierCard({ classifier }) {
         </div>
 
         <div className="flex justify-between items-center g-primary-950 border-t border-t-primary-800 pt-5 pb-3 px-7">
-          {cls_items.map((item) => (
-            <ClassifierItem item={item} key={item.id} />
+          {cls_values.map((val) => (
+            <ClassifierValue value={val} key={val.id} />
           ))}
         </div>
       </div>

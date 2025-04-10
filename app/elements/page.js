@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 
-import ComponentList from '@/app/_components/ComponentList';
+import ElementList from '@/app/_components/ElementList';
 import Spinner from '@/app/_components/Spinner';
 import Filter from '@/app/_components/Filter';
 import { getDivisions } from '@/app/_lib/data-service';
 
 export const metadata = {
-  title: 'Applications',
+  title: 'Elements',
 };
 
 // dynamic rendering
@@ -29,14 +29,14 @@ export default async function Page({ searchParams }) {
 
   return (
     <div>
-      <h1 className="text-4xl mb-5 text-blue-400 font-medium">Components</h1>
+      <h1 className="text-4xl mb-5 text-blue-400 font-medium">Elements</h1>
 
       <div className="flex justify-end mb-8">
         <Filter filterList={filterList} />
       </div>
 
       <Suspense fallback={<Spinner />} key={division_id}>
-        <ComponentList division_id={division_id} />
+        <ElementList division_id={division_id} />
       </Suspense>
     </div>
   );

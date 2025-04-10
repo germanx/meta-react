@@ -1,15 +1,16 @@
 'use server';
 
-import { getClassifierItems } from '@/app/_lib/data-service';
+import { getClassifierValues } from '@/app/_lib/data-service';
 
-async function ClassifierSelect({
+async function ClassifierValueSelect({
   classifier_id,
   name,
   id,
   defaultValue,
   className,
 }) {
-  const items = await getClassifierItems(classifier_id);
+  // console.log('>>> ClassifiersSelect', classifier_type_id);
+  const items = await getClassifierValues(classifier_id);
 
   return (
     <select
@@ -18,7 +19,7 @@ async function ClassifierSelect({
       defaultValue={defaultValue}
       className={className}
     >
-      <option value="">Select Classifier item...</option>
+      <option value="">Select Classifiers...</option>
       {items.map((c) => (
         <option key={c.id} value={c.id}>
           {`${c.name.trim()}${
@@ -30,4 +31,4 @@ async function ClassifierSelect({
   );
 }
 
-export default ClassifierSelect;
+export default ClassifierValueSelect;

@@ -1,4 +1,4 @@
-import ClassifierForm from '@/app/_components/ClassifierForm';
+import ClassifierForm from '@/app/_components/ClassifierTypeForm';
 
 export const metadata = {
   title: 'Insert Classifier',

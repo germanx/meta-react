@@ -2,31 +2,33 @@ import { notFound } from 'next/navigation';
 import { eachDayOfInterval } from 'date-fns';
 import { supabase } from './supabase';
 
+// For testing !!!!!!!!!!!!!!
+// await new Promise((res) => setTimeout(res, 2000));
+
 /////////////
 // GET
-export async function getComponent(id) {
+export async function getElement(id) {
   const { data, error } = await supabase
-    .from('component')
+    .from('element')
     .select('id, name, description, division_id, division(name)')
     .eq('id', id)
     .single();
+  // console.log('>>> getElement', id, data);
 
-  // For testing !!!!!!!!!!!!!!
-  // await new Promise((res) => setTimeout(res, 2000));
-
-  if (error) notFound();
+  // if (error) notFound();
+  if (error) throw new Error('Element could not be loaded');
   return data;
 }
 
-export const getComponents = async function () {
+export const getElements = async function () {
   const { data, error } = await supabase
-    .from('component')
+    .from('element')
     .select('id, name, description, division_id, division(name)')
     .order('name');
 
   // console.log(data);
 
-  if (error) throw new Error('Applications could not be loaded');
+  if (error) throw new Error('Elements could not be loaded');
   return data;
 };
 
@@ -48,7 +50,7 @@ export async function getClassifiers() {
     .order('name');
   // console.log('>>> cls', data);
 
-  if (error) throw new Error('Classifier could not be loaded');
+  if (error) throw new Error('Classifiers could not be loaded');
   return data;
 }
 
@@ -63,26 +65,27 @@ export async function getClassifier(id) {
   return data;
 }
 
-export async function getClassifierItems(classifier_id) {
+export async function getClassifierValues(classifier_id) {
   const { data, error } = await supabase
-    .from('classifier_item')
+    .from('classifier_value')
     .select('id, name, description, classifier_id')
     .eq('classifier_id', classifier_id)
     .order('name');
-  // console.log('>>> cls_items', data, classifier_id);
+  // console.log('>>> getClassifiers', data, classifier_type_id);
 
-  if (error) throw new Error('Classifier Items could not be loaded');
+  if (error) throw new Error('Classifier values could not be loaded');
   return data;
 }
 
-export async function getComponentClassifier(component_id) {
+export async function getElementClassifiers(element_id) {
   const { data, error } = await supabase
-    .from('component_classifier')
-    .select('component_id, classifier_item_id, classifier_item(classifier_id)')
-    .eq('component_id', component_id);
-  // console.log('>>> cls_items', data);
+    .from('element_classifier')
+    .select('element_id, classifier_id, classifier_value_id, classifier(name)')
+    .eq('element_id', element_id)
+    .order('classifier(name)');
+  // console.log('>>> getElementClassifiers', data);
 
-  if (error) throw new Error('Classifier Items could not be loaded');
+  if (error) throw new Error('Element classifiers could not be loaded');
   return data;
 }
 //////////////////////////////////////////////////////////////

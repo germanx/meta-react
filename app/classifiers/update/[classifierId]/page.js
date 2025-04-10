@@ -1,4 +1,4 @@
-import { getClassifier, getClassifierItems } from '@/app/_lib/data-service';
+import { getClassifier, getClassifierValues } from '@/app/_lib/data-service';
 import ClassifierForm from '@/app/_components/ClassifierForm';
 
 export const metadata = {
@@ -11,13 +11,13 @@ export const metadata = {
 
 export default async function Page({ params }) {
   const classifier = await getClassifier(params.classifierId);
-  const classifierItems = await getClassifierItems(params.classifierId);
+  const classifierValues = await getClassifierValues(params.classifierId);
 
   return (
     <div className="max-w-6xl mx-auto mt-8">
       <ClassifierForm
         classifier={classifier}
-        classifierItems={classifierItems}
+        classifierValues={classifierValues}
       />
     </div>
   );

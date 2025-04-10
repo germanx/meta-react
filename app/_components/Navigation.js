@@ -10,18 +10,18 @@ export default async function Navigation() {
       <ul className="flex gap-16 items-center">
         <li>
           <Link
-            href="/component"
+            href="/elements"
             className="hover:text-blue-400 transition-colors"
           >
-            Components
+            Elements
           </Link>
         </li>
         <li>
           <Link
-            href="/classifier"
+            href="/classifiers"
             className="hover:text-blue-400 transition-colors"
           >
-            Classifier
+            Classifiers
           </Link>
         </li>
         <li>

@@ -1,7 +1,7 @@
 import SubmitButton from './SubmitButton';
-import { updateClassifier, updateClassifierItem } from '../_lib/actions';
+import { updateClassifierValue, updateClassifier } from '../_lib/actions';
 
-function ClassifierForm({ classifier, classifierItems }) {
+function ClassifierForm({ classifier, classifierValues }) {
   const { id, name, description } = classifier;
 
   return (
@@ -13,7 +13,7 @@ function ClassifierForm({ classifier, classifierItems }) {
         <div className="space-y-2">
           <input type="hidden" name="id" value={id} />
 
-          <label>Classifier Name</label>
+          <label>Classifier Type Name</label>
           <input
             name="name"
             // disabled
@@ -34,17 +34,17 @@ function ClassifierForm({ classifier, classifierItems }) {
 
         <div className="flex justify-end items-center gap-6">
           <SubmitButton pendingLabel="Updating...">
-            Update classifier
+            Update classifier type
           </SubmitButton>
         </div>
       </form>
 
       <h3 className="text-2xl mt-6 text-blue-400 font-medium">Items</h3>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-        {classifierItems?.map((item) => (
+        {classifierValues?.map((item) => (
           <form
             key={item.id}
-            action={updateClassifierItem}
+            action={updateClassifierValue}
             className="bg-primary-900 py-6 px-6 text-lg flex gap-6 flex-col"
           >
             <div className="space-y-2">
@@ -71,7 +71,7 @@ function ClassifierForm({ classifier, classifierItems }) {
 
             <div className="flex justify-end items-center gap-6">
               <SubmitButton pendingLabel="Updating...">
-                Update item
+                Update classifier
               </SubmitButton>
               {/* <SubmitButton pendingLabel="Deleting...">
                 Delete item

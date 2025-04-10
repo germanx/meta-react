@@ -1,7 +1,7 @@
 import ClassifierCard from '@/app/_components/ClassifierCard';
 import { getClassifiers } from '@/app/_lib/data-service';
 
-async function Classifier() {
+async function ClassifierList() {
   const classifiers = await getClassifiers();
 
   if (!classifiers.length) return null;
@@ -15,4 +15,4 @@ async function Classifier() {
   );
 }
 
-export default Classifier;
+export default ClassifierList;

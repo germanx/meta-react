@@ -1,7 +1,8 @@
 import { UsersIcon } from '@heroicons/react/24/solid';
 
-function ApplicationView({ component }) {
-  const { name, description, division } = component;
+function ElementView({ element }) {
+  const { name, description, division } = element;
+  // console.log('>>> ElementView', element);
 
   return (
     <div className="border border-primary-800 py-3 px-10 mb-24">
@@ -11,7 +12,7 @@ function ApplicationView({ component }) {
         </h3>
         <div className="flex gap-3 items-center mb-2">
           <UsersIcon className="h-5 w-5 text-primary-600" />
-          <p className="text-2xl text-primary-200">{division}</p>
+          <p className="text-2xl text-primary-200">{division.name}</p>
         </div>
       </div>
       <p className="text-2xl text-primary-300 mb-10">{description}</p>
@@ -19,4 +20,4 @@ function ApplicationView({ component }) {
   );
 }
 
-export default ApplicationView;
+export default ElementView;

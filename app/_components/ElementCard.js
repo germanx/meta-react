@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { UsersIcon } from '@heroicons/react/24/solid';
 
-function ComponentCard({ component }) {
-  const { id, name, description, division } = component;
+function ElementCard({ element }) {
+  const { id, name, description, division } = element;
 
   return (
     <div className="flex border-primary-800 border">
@@ -34,7 +34,7 @@ function ComponentCard({ component }) {
               View Details &rarr;
             </Link> */}
             <Link
-              href={`/component/update/${id}`}
+              href={`/elements/update/${id}`}
               className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"
             >
               Update Details &rarr;
@@ -46,4 +46,4 @@ function ComponentCard({ component }) {
   );
 }
 
-export default ComponentCard;
+export default ElementCard;
