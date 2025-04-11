@@ -1,6 +1,7 @@
-import { notFound } from 'next/navigation';
+// import { notFound } from 'next/navigation';
 import { eachDayOfInterval } from 'date-fns';
-import { supabase } from './supabase';
+
+import { supabase } from '@/app/_lib/supabase';
 
 // For testing !!!!!!!!!!!!!!
 // await new Promise((res) => setTimeout(res, 2000));
@@ -8,6 +9,8 @@ import { supabase } from './supabase';
 /////////////
 // GET
 export async function getElement(id) {
+  // if (!id) return { id: 0, name: '', description: '', division_id: null };
+
   const { data, error } = await supabase
     .from('element')
     .select('id, name, description, division_id, division(name)')
@@ -88,6 +91,22 @@ export async function getElementClassifiers(element_id) {
   if (error) throw new Error('Element classifiers could not be loaded');
   return data;
 }
+
+// export async function getClassifiersAndElements(element_id) {
+//   const { data, error } = await supabase
+//     .from('classifier')
+//     .select(
+//       'id, name, description, element_classifier(element_id, classifier_value_id)'
+//     )
+//     .eq('element_classifier(element_id)', element_id)
+//     .order('name');
+
+//   if (error) throw new Error('Classifier by element could not be loaded');
+
+//   console.log('>>> getElementClassifiers', data);
+
+//   return data;
+// }
 //////////////////////////////////////////////////////////////
 // Guests are uniquely identified by their email address
 export async function getGuest(email) {

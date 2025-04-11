@@ -1,6 +1,9 @@
 import Link from 'next/link';
-import { getClassifierValues } from '../_lib/data-service';
-import ClassifierValue from './ClassifierValue';
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
+
+import { getClassifierValues } from '@/app/_lib/data-service';
+import ClassifierValue from '@/app/_components/ClassifierValue';
+import ClassifierDelete from '@/app/_components/ClassifierDelete';
 
 async function ClassifierCard({ classifier }) {
   const { id, name, description } = classifier;
@@ -16,13 +19,16 @@ async function ClassifierCard({ classifier }) {
             </h3>
             <p>{description}</p>
           </div>
-          <div className="border-primary-800 border">
+
+          <div className="flex flex-col gap-1">
             <Link
               href={`/classifiers/update/${id}`}
-              className="py-3 px-4 inline-block hover:bg-blue-600 transition-all hover:text-primary-900"
+              className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900"
             >
-              Update &rarr;
+              <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
+              <span className="mt-1">Edit</span>
             </Link>
+            <ClassifierDelete id={id} />
           </div>
         </div>
 

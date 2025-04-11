@@ -8,7 +8,7 @@ function ClassifierValue({ value }) {
       <div className="flex-grow">
         <div className="flex flex-col bg-primary-950">
           <h3 className="text-blue-500 font-semibold text-xl mb-2">{name}</h3>
-          <p>{description ? description : '-'}</p>
+          <p>{description ? description : 'n/a'}</p>
         </div>
       </div>
     </div>

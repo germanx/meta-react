@@ -15,23 +15,27 @@ export async function updateElement(formData) {
   const description = formData.get('description');
   const division_id = Number(formData.get('division_id'));
 
-  const updateData = {
+  const newData = {
     name,
     description,
     division_id,
   };
   // console.log('>>> update', updateData);
 
-  const { data, error } = await supabase
-    .from('element')
-    .update(updateData)
-    .eq('id', id);
+  if (id === 0) {
+    const { errorI } = await supabase.from('element').insert(newData);
 
-  if (error) throw new Error('Component could not be updated');
+    if (errorI) throw new Error('Classifier could not be inserted');
+  } else {
+    const { error } = await supabase
+      .from('element')
+      .update(newData)
+      .eq('id', id);
 
+    if (error) throw new Error('Component could not be updated');
+  }
   revalidatePath('/elements');
   revalidatePath(`/elements/update/${id}`);
-
   redirect('/elements');
 }
 
@@ -43,22 +47,35 @@ export async function updateClassifier(formData) {
   const name = formData.get('name');
   const description = formData.get('description');
 
-  const updateData = {
+  const data = {
     name,
     description,
   };
 
-  const { error } = await supabase
-    .from('classifier')
-    .update(updateData)
-    .eq('id', id);
-
-  if (error) throw new Error('Classifier could not be updated');
+  if (id === 0) {
+    const { errorI } = await supabase.from('classifier').insert(data);
+    if (errorI) throw new Error('Classifier could not be inserted');
+  } else {
+    const { error } = await supabase
+      .from('classifier')
+      .update(data)
+      .eq('id', id);
+    if (error) throw new Error('Classifier could not be updated');
+  }
 
   revalidatePath('/classifiers');
   revalidatePath(`/classifiers/update/${id}`);
+}
 
-  // redirect('/classifier');
+export async function deleteClassifier(id) {
+  // const session = await auth();
+  // if (!session) throw new Error('You must be logged in');
+
+  const { error } = await supabase.from('classifier').delete().eq('id', id);
+  if (error) throw new Error('Classifier could not be deleted');
+
+  revalidatePath('/classifiers');
+  redirect('/classifiers');
 }
 
 // export async function updateClassifierItem(formData) {
@@ -67,32 +84,39 @@ export async function updateClassifierValue(formData) {
   // if (!session) throw new Error('You must be logged in');
 
   const id = Number(formData.get('id'));
+  const classifier_id = Number(formData.get('classifier_id'));
   const name = formData.get('name');
   const description = formData.get('description');
 
-  const updateData = {
+  const newData = {
     name,
+    classifier_id,
     description,
   };
 
-  const { error } = await supabase
-    .from('classifier_value')
-    .update(updateData)
-    .eq('id', id);
+  if (id === 0) {
+    const { errorI } = await supabase.from('classifier_value').insert(newData);
+    if (errorI) throw new Error('Classifier value could not be inserted');
+  } else {
+    const { error } = await supabase
+      .from('classifier_value')
+      .update(newData)
+      .eq('id', id);
 
-  if (error) throw new Error('Classifier could not be updated');
+    if (error) throw new Error('Classifier value could not be updated');
+  }
 
+  revalidatePath('/elements');
   revalidatePath('/classifiers');
   revalidatePath(`/classifiers/update/${id}`);
-
-  // redirect('/classifier');
+  // redirect('/classifiers');
 }
 
 export async function updateElementClassifier(formData) {
   // const session = await auth();
   // if (!session) throw new Error('You must be logged in');
 
-  // console.log('>>> formData:', formData);
+  console.log('>>> formData:', formData);
 
   const element_id = Number(formData.get('element_id'));
   const classifier_id = Number(formData.get('classifier_id'));

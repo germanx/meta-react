@@ -4,6 +4,7 @@ import ElementList from '@/app/_components/ElementList';
 import Spinner from '@/app/_components/Spinner';
 import Filter from '@/app/_components/Filter';
 import { getDivisions } from '@/app/_lib/data-service';
+import ButtonInsert from '@/app/_components/ButtonInsert';
 
 export const metadata = {
   title: 'Elements',
@@ -31,7 +32,8 @@ export default async function Page({ searchParams }) {
     <div>
       <h1 className="text-4xl mb-5 text-blue-400 font-medium">Elements</h1>
 
-      <div className="flex justify-end mb-8">
+      <div className="flex justify-between item-center mb-8">
+        <ButtonInsert href="/elements/update/0" />
         <Filter filterList={filterList} />
       </div>
 

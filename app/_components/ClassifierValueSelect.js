@@ -9,7 +9,7 @@ async function ClassifierValueSelect({
   defaultValue,
   className,
 }) {
-  // console.log('>>> ClassifiersSelect', classifier_type_id);
+  console.log('>>> ClassifiersSelect defaultValue:', defaultValue);
   const items = await getClassifierValues(classifier_id);
 
   return (

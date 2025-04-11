@@ -1,11 +1,12 @@
 'use client';
 
+import { useTransition } from 'react';
 import { TrashIcon } from '@heroicons/react/24/solid';
 
-import { useTransition } from 'react';
-import SpinnerMini from './SpinnerMini';
+import SpinnerMini from '@/app/_components/SpinnerMini';
+import { deleteClassifier } from '@/app/_lib/actions';
 
-function DeleteReservation({ bookingId, onDelete }) {
+function ClassifierDelete({ id, onDelete }) {
   // async function deleteReservation() {
   //   'use server';
   // }
@@ -14,7 +15,8 @@ function DeleteReservation({ bookingId, onDelete }) {
 
   function handleDelete() {
     if (confirm('Are you sure you want to delete this reservation?'))
-      startTransition(() => onDelete(bookingId));
+      // startTransition(() => onDelete(id));
+      startTransition(() => deleteClassifier(id));
   }
 
   return (
@@ -36,4 +38,4 @@ function DeleteReservation({ bookingId, onDelete }) {
   );
 }
 
-export default DeleteReservation;
+export default ClassifierDelete;

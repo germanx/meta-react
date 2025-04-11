@@ -3,7 +3,7 @@ import ClassifierValueSelect from './ClassifierValueSelect';
 import DivisionSelect from './DivisionSelect';
 import SubmitButton from './SubmitButton';
 
-function ElementForm({ element, elementClassifiers }) {
+function ElementForm({ element, elementClassifiers, classifiers }) {
   const { id, name, description, division_id } = element;
   // console.log('>>> ElementForm');
 
@@ -46,9 +46,7 @@ function ElementForm({ element, elementClassifiers }) {
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <SubmitButton pendingLabel="Updating...">
-            Update application
-          </SubmitButton>
+          <SubmitButton pendingLabel="Updating...">Update element</SubmitButton>
         </div>
       </form>
 
@@ -60,19 +58,15 @@ function ElementForm({ element, elementClassifiers }) {
             key={item.id}
           >
             <input type="hidden" name="element_id" value={id} />
-            <input
-              type="hidden"
-              name="classifier_id"
-              value={item.classifier_id}
-            />
+            <input type="hidden" name="classifier_id" value={item.id} />
 
             <div className="space-y-2" key={item.id}>
-              <label>{item.classifier.name}</label>
+              <label>{item.name}</label>
               <ClassifierValueSelect
-                classifier_id={item.classifier_id}
+                classifier_id={item.id}
                 name="classifier_value_id"
                 id="classifier_value_id"
-                defaultValue={item.classifier_value_id}
+                defaultValue={item?.classifier_value_id}
                 className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
               />
             </div>
